@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function App() {
   return (
@@ -6,18 +7,24 @@ export default function App() {
 
       {/* Header */}
       <header className="fixed w-full z-50 bg-white/80 backdrop-blur-lg shadow-sm transition">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-          <img src="/uptoskill.jpeg" alt="Uptoskills Logo" className="h-10 transition-transform hover:scale-110" />
-          <nav className="flex space-x-6 font-medium text-gray-800 text-sm">
-            {["Home", "About", "Programs", "Contact"].map((link, i) => (
-              <a key={i} href="#" className="relative group hover:text-[#00BDA6]">
-                {link}
-                <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-[#00BDA6] group-hover:w-full transition-all duration-300"></span>
-              </a>
-            ))}
-          </nav>
-        </div>
-      </header>
+  <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+    <Link to="/" aria-label="Uptoskills Home">
+      <img src="/uptoskill.jpeg" alt="Uptoskills Logo" className="h-10 transition-transform hover:scale-110" />
+    </Link>
+
+    <nav className="flex space-x-6 font-medium text-gray-800 text-sm">
+      {["Home", "About", "Programs", "Contact"].map((link, i) => {
+        const path = link.toLowerCase() === "home" ? "/" : `/${link.toLowerCase()}`;
+        return (
+          <Link key={i} to={path} className="relative group hover:text-[#00BDA6]">
+            {link}
+            <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-[#00BDA6] group-hover:w-full transition-all duration-300" />
+          </Link>
+        );
+      })}
+    </nav>
+  </div>
+</header>
 
       {/* Hero Section */}
       <section className="pt-32 md:pt-44 pb-20 px-6 md:px-16 bg-gradient-to-br from-[#e0fdf4] via-[#f7fffe] to-[#c1f6e8] relative overflow-hidden">
