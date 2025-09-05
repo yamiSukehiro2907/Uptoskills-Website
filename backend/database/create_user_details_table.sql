@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS user_details (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
 -- Create index for better query performance
 CREATE INDEX IF NOT EXISTS idx_user_details_full_name ON user_details(full_name);
 
