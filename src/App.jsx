@@ -3,6 +3,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+// ===== Landing Page Components (moved inside components/AboutPage) =====
+import Header from './components/AboutPage/Header';
+import HeroSection from './components/AboutPage/HeroSection';
+import AboutSection from './components/AboutPage/AboutSection';
+import ProgramsSection from './components/AboutPage/ProgramsSection';
+import Footer from './components/AboutPage/Footer';
+
+// ===== Pages =====
 import Landing from './pages/Landing';
 import Student_Dashboard from "./pages/Student_Dashboard";
 import EditProfilePage from './components/Student_Dashboard/EditProfile/EditProfilePage';
@@ -18,42 +27,60 @@ import ContactPage from './pages/ContactPage';
 import ProjectShowcasePage from './pages/ProjectShowcasePage';
 import MentorDashboardRoutes from './pages/MentorDashboardRoutes';
 import AdminPanel from './pages/AdminPanel';
+
 const queryClient = new QueryClient();
+
+// ===== Landing Page Wrapper =====
+const LandingPage = () => (
+  <div>
+    <Header />
+    <HeroSection />
+    <AboutSection />
+    <ProgramsSection />
+    <Footer />
+  </div>
+);
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Routes>
-        {/* =====  Student Dashboard Routes  ===== */}
-        <Route path="/" element={<Landing />} />
-        <Route path="/dashboard" element={<Student_Dashboard />} />
-        <Route path="/dashboard/profile" element={<UserProfilePage />} />
-        <Route path="/dashboard/edit-profile" element={<EditProfilePage />} />
-        <Route path="/dashboard/my-projects" element={<MyProjects />} />
-        <Route path="/dashboard/skill-badges" element={<SkillBadgeForm />} />
-        <Route path="/dashboard/notifications" element={<NotificationsPage />} />
+      <Router>
+        <Routes>
+          {/* ===== Landing Page ===== */}
+          <Route path="/" element={<LandingPage />} />
 
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<RegistrationForm />} />
+          {/* ===== Student Dashboard Routes ===== */}
+          <Route path="/dashboard" element={<Student_Dashboard />} />
+          <Route path="/dashboard/profile" element={<UserProfilePage />} />
+          <Route path="/dashboard/edit-profile" element={<EditProfilePage />} />
+          <Route path="/dashboard/my-projects" element={<MyProjects />} />
+          <Route path="/dashboard/skill-badges" element={<SkillBadgeForm />} />
+          <Route path="/dashboard/notifications" element={<NotificationsPage />} />
 
-        {/* ===== Company Dashboard Routes ===== */}
-        <Route path="/company" element={<CompanyDashboardHome />} />
-       
-        {/* ===== Catch-All Routes ===== */}
-        <Route path="/company/*" element={<CompanyNotFound />} />
-        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+          {/* ===== Auth Routes ===== */}
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RegistrationForm />} />
 
-        {/* ===== Contact Page Routes ===== */}
-        <Route path="/contact" element={<ContactPage />} />
-        {/*===== Project Showcase Page Routes */}
-        <Route path="/projectShowcase" element={<ProjectShowcasePage/>} />
+          {/* ===== Company Dashboard Routes ===== */}
+          <Route path="/company" element={<CompanyDashboardHome />} />
+          <Route path="/company/*" element={<CompanyNotFound />} />
 
-        {/*===== Mentor Dashboard Page routes */}  
-        <Route path="/mentor-dashboard/*" element={<MentorDashboardRoutes />} />
+          {/* ===== Contact Page ===== */}
+          <Route path="/contact" element={<ContactPage />} />
 
-         {/* ==== Admin Panel page routes */}
-        <Route path ="/adminPanel" element={<AdminPanel />} />
-      </Routes>
+          {/* ===== Project Showcase ===== */}
+          <Route path="/projectShowcase" element={<ProjectShowcasePage />} />
+
+          {/* ===== Mentor Dashboard ===== */}
+          <Route path="/mentor-dashboard/*" element={<MentorDashboardRoutes />} />
+
+          {/* ===== Admin Panel ===== */}
+          <Route path="/adminPanel" element={<AdminPanel />} />
+
+          {/* ===== Catch-All ===== */}
+          <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+        </Routes>
+      </Router>
     </QueryClientProvider>
   );
 }
