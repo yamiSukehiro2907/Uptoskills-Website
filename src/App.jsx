@@ -18,42 +18,63 @@ import ContactPage from './pages/ContactPage';
 import ProjectShowcasePage from './pages/ProjectShowcasePage';
 import MentorDashboardRoutes from './pages/MentorDashboardRoutes';
 import AdminPanel from './pages/AdminPanel';
+
+// About Page components
+import Header from './components/Header';
+import HeroSection from './components/HeroSection';
+import AboutSection from './components/AboutSection';
+import ProgramsSection from './components/ProgramsSection';
+import Footer from './components/Footer';
+
 const queryClient = new QueryClient();
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Routes>
-        {/* =====  Student Dashboard Routes  ===== */}
-        <Route path="/" element={<Landing />} />
-        <Route path="/dashboard" element={<Student_Dashboard />} />
-        <Route path="/dashboard/profile" element={<UserProfilePage />} />
-        <Route path="/dashboard/edit-profile" element={<EditProfilePage />} />
-        <Route path="/dashboard/my-projects" element={<MyProjects />} />
-        <Route path="/dashboard/skill-badges" element={<SkillBadgeForm />} />
-        <Route path="/dashboard/notifications" element={<NotificationsPage />} />
+      <Router>
+        <Routes>
+          {/* =====About Page Routes ===== */}
+          <Route path="/" element={
+            <div>
+              <Header />
+              <HeroSection />
+              <AboutSection />
+              <ProgramsSection />
+              <Footer />
+            </div>
+          } />
+          
+          {/* =====  Student Dashboard Routes  ===== */}
+          <Route path="/dashboard" element={<Student_Dashboard />} />
+          <Route path="/dashboard/profile" element={<UserProfilePage />} />
+          <Route path="/dashboard/edit-profile" element={<EditProfilePage />} />
+          <Route path="/dashboard/my-projects" element={<MyProjects />} />
+          <Route path="/dashboard/skill-badges" element={<SkillBadgeForm />} />
+          <Route path="/dashboard/notifications" element={<NotificationsPage />} />
 
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<RegistrationForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RegistrationForm />} />
 
-        {/* ===== Company Dashboard Routes ===== */}
-        <Route path="/company" element={<CompanyDashboardHome />} />
-       
-        {/* ===== Catch-All Routes ===== */}
-        <Route path="/company/*" element={<CompanyNotFound />} />
-        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+          {/* ===== Company Dashboard Routes ===== */}
+          <Route path="/company" element={<CompanyDashboardHome />} />
+        
+          {/* ===== Catch-All Routes ===== */}
+          <Route path="/company/*" element={<CompanyNotFound />} />
+          <Route path="*" element={<h1>404 - Page Not Found</h1>} />
 
-        {/* ===== Contact Page Routes ===== */}
-        <Route path="/contact" element={<ContactPage />} />
-        {/*===== Project Showcase Page Routes */}
-        <Route path="/projectShowcase" element={<ProjectShowcasePage/>} />
+          {/* ===== Contact Page Routes ===== */}
+          <Route path="/contact" element={<ContactPage />} />
+          
+          {/* ===== Project Showcase Page Routes ===== */}
+          <Route path="/projectShowcase" element={<ProjectShowcasePage/>} />
 
-        {/*===== Mentor Dashboard Page routes */}  
-        <Route path="/mentor-dashboard/*" element={<MentorDashboardRoutes />} />
+          {/* ===== Mentor Dashboard Page routes ===== */}  
+          <Route path="/mentor-dashboard/*" element={<MentorDashboardRoutes />} />
 
-         {/* ==== Admin Panel page routes */}
-        <Route path ="/adminPanel" element={<AdminPanel />} />
-      </Routes>
+          {/* ===== Admin Panel page routes ===== */}
+          <Route path ="/adminPanel" element={<AdminPanel />} />
+        </Routes>
+      </Router>
     </QueryClientProvider>
   );
 }
