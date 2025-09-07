@@ -20,11 +20,11 @@ import MentorDashboardRoutes from './pages/MentorDashboardRoutes';
 import AdminPanel from './pages/AdminPanel';
 
 // About Page components
-import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import AboutSection from './components/AboutSection';
-import ProgramsSection from './components/ProgramsSection';
-import Footer from './components/Footer';
+import Header from './components/AboutPage/Header';
+import HeroSection from './components/AboutPage/HeroSection';
+import AboutSection from './components/AboutPage/AboutSection';
+import ProgramsSection from './components/AboutPage/ProgramsSection';
+import Footer from './components/AboutPage/Footer';
 
 const queryClient = new QueryClient();
 
@@ -33,8 +33,11 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
+          {/* ===== Landing Page ===== */}
+          <Route path="/" element={<Landing />} />
+
           {/* =====About Page Routes ===== */}
-          <Route path="/" element={
+          <Route path="/about" element={
             <div>
               <Header />
               <HeroSection />
@@ -43,7 +46,7 @@ function App() {
               <Footer />
             </div>
           } />
-          
+
           {/* =====  Student Dashboard Routes  ===== */}
           <Route path="/dashboard" element={<Student_Dashboard />} />
           <Route path="/dashboard/profile" element={<UserProfilePage />} />
