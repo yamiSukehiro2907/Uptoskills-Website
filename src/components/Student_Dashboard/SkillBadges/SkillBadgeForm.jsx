@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import Header from '../dashboard/Header';
 import Sidebar from '../dashboard/Sidebar';
-import RightSidebar from '../dashboard/RightSidebar';
+// import RightSidebar from '../dashboard/RightSidebar';
 
 const SkillBadgeForm = ({ isDarkMode, toggleDarkMode }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -100,7 +100,7 @@ const SkillBadgeForm = ({ isDarkMode, toggleDarkMode }) => {
         </div>
       </div>
 
-      <RightSidebar isDarkMode={isDarkMode} className="padded-top" />
+      {/* <RightSidebar isDarkMode={isDarkMode} className="padded-top" /> */}
     </div>
   );
 };
