@@ -3,7 +3,7 @@ import './NotificationPage.css';
 
 // Imports file      
 import Header from '../dashboard/Header';
-import RightSidebar from '../dashboard/RightSidebar';
+// import RightSidebar from '../dashboard/RightSidebar';
 import Sidebar from '../dashboard/Sidebar';
 
 // Sample data for the notifications
@@ -68,7 +68,7 @@ const NotificationsPage = ({ isDarkMode, toggleDarkMode }) => {
         </div>
 
       </div>
-      <RightSidebar isDarkMode={isDarkMode} className="padded-top" />
+      {/* <RightSidebar isDarkMode={isDarkMode} className="padded-top" /> */}
     </div>
   );
 };

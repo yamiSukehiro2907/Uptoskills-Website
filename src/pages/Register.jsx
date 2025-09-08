@@ -89,7 +89,7 @@ const RegistrationForm = () => {
                 >
                   <option value="Admin">Register as Admin</option>
                   <option value="Student">Register as Student</option>
-                  <option value="Administrator">Register as Administrator</option>
+                  <option value="Administrator">Register as company</option>
                 </select>
 
                 <input
