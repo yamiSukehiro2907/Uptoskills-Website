@@ -1,3 +1,4 @@
+// Sidebar.jsx
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
@@ -29,16 +30,37 @@ export default function Sidebar({ isOpen, setIsOpen }) {
 
   useEffect(() => {
     const checkScreen = () => {
-      const desktop = window.innerWidth >= 1024;
+      const desktop = typeof window !== "undefined" && window.innerWidth >= 1024;
       setIsDesktop(desktop);
       if (desktop) setIsOpen(true);
     };
     checkScreen();
-    window.addEventListener("resize", checkScreen);
-    return () => window.removeEventListener("resize", checkScreen);
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", checkScreen);
+      return () => window.removeEventListener("resize", checkScreen);
+    }
   }, [setIsOpen]);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
+
+  // helper to scroll to section id with optional header offset
+  const scrollToSection = (id, offsetSelector = ".site-header", fallback = 80) => {
+    if (typeof window === "undefined") return;
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // compute header offset if present
+    const headerEl = document.querySelector(offsetSelector);
+    const headerOffset = headerEl ? headerEl.offsetHeight : fallback;
+
+    const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = elementPosition - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <>
@@ -100,7 +122,23 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                     }
                   `}
                   onClick={() => {
+                    // Set active item first
                     setActiveItem(item.id);
+
+                    // Dashboard -> scroll to top
+                    if (item.id === "dashboard") {
+                      if (typeof window !== "undefined") {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }
+                    }
+
+                    // Interviews -> scroll to section with header offset
+                    if (item.id === "interviews") {
+                      // Change '.site-header' selector if your header class differs
+                      scrollToSection("upcoming-interviews", ".site-header", 80);
+                    }
+
+                    // Close on mobile
                     if (!isDesktop) setIsOpen(false);
                   }}
                   initial={{ opacity: 0, x: -20 }}
@@ -231,17 +269,12 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                 </span>
               </div>
               <div>
-                <p className="text-sidebar-foreground font-medium">
-                  HR Manager
-                </p>
-                <p className="text-sidebar-foreground/70 text-sm">
-                  TechCorp Inc.
-                </p>
+                <p className="text-sidebar-foreground font-medium">HR Manager</p>
+                <p className="text-sidebar-foreground/70 text-sm">TechCorp Inc.</p>
               </div>
             </div>
 
             {/* Logout Button */}
-
             <motion.button
               className=" sidebar-item w-full text-red-400 hover:bg-red-500/10 flex items-center gap-3 p-2 rounded-lg"
               whileHover={{ x: 4 }}
