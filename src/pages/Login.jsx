@@ -51,9 +51,9 @@ const LoginForm = () => {
                                     onChange={handleChange}
                                     className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 text-gray-700 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                                 >
-                                    <option value="Official">Login as company</option>
+                                    <option value="company">Login as company</option>
                                     <option value="student">Login as Student</option>
-                                    <option value="administrator">Login as Admin</option>
+                                    <option value="Admin">Login as Admin</option>
                                 </select>
 
                                 {/* Email Input */}
