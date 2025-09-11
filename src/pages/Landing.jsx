@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom"; 
 
 export default function App() {
   return (
@@ -8,14 +9,18 @@ export default function App() {
       <header className="fixed w-full z-50 bg-white/80 backdrop-blur-lg shadow-sm transition">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
           <img src="/uptoskill.jpeg" alt="Uptoskills Logo" className="h-10 transition-transform hover:scale-110" />
-          <nav className="flex space-x-6 font-medium text-gray-800 text-sm">
-            {["Home", "About", "Programs", "Contact"].map((link, i) => (
-              <a key={i} href="#" className="relative group hover:text-[#00BDA6]">
-                {link}
-                <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-[#00BDA6] group-hover:w-full transition-all duration-300"></span>
-              </a>
-            ))}
-          </nav>
+  <nav className="flex space-x-6 font-medium text-gray-800 text-sm">
+     <Link  to="/about" className="relative group hover:text-[#00BDA6]">
+          About
+          <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-[#00BDA6] group-hover:w-full transition-all duration-300"></span>
+     </Link>
+  
+
+      <Link to="/contact" className="relative group hover:text-[#00BDA6]">
+      Contact
+      <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-[#00BDA6] group-hover:w-full transition-all duration-300"></span>
+     </Link>
+</nav>
         </div>
       </header>
 
