@@ -81,12 +81,14 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid role' });
     }
 
+    if (role.toLowerCase() === 'admin') {
+      return res.status(400).json({ success: false, message: 'Admin registration is not allowed' });
+    }
+
     // Select table based on role
     let tableName;
     if (role.toLowerCase() === 'company') {
       tableName = 'companies';
-    } else if (role.toLowerCase() === 'admin') {
-      tableName = 'admins';
     } else {
       tableName = 'students';
     }

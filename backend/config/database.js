@@ -10,8 +10,7 @@ const pool = new Pool({
   ssl: process.env.DB_SSLMODE === 'require' ? { rejectUnauthorized: false } : false,
 });
 
-// Test the database connection
-pool.connect(async (err, client, release) => {
+pool.connect((err, client, release) => {
   if (err) {
     console.error('Error connecting to the database:', err.stack);
   } else {
