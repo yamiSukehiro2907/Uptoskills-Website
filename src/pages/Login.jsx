@@ -27,11 +27,11 @@ const LoginForm = () => {
       localStorage.setItem("token", response.data.token);
 
       if (response.data.user.role === "admin") {
-        navigate("/admin-dashboard");
+        navigate("/adminPanel");
       } else if (response.data.user.role === "student") {
-        navigate("/student-dashboard");
+        navigate("/dashboard");
       } else if (response.data.user.role === "company") {
-        navigate("/company-dashboard");
+        navigate("/company");
       } else {
         navigate("/");
       }
