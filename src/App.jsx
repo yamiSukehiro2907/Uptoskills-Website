@@ -18,42 +18,66 @@ import ContactPage from './pages/ContactPage';
 import ProjectShowcasePage from './pages/ProjectShowcasePage';
 import MentorDashboardRoutes from './pages/MentorDashboardRoutes';
 import AdminPanel from './pages/AdminPanel';
+
+// About Page components
+import Header from './components/AboutPage/Header';
+import HeroSection from './components/AboutPage/HeroSection';
+import AboutSection from './components/AboutPage/AboutSection';
+import ProgramsSection from './components/AboutPage/ProgramsSection';
+import Footer from './components/AboutPage/Footer';
+
 const queryClient = new QueryClient();
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Routes>
-        {/* =====  Student Dashboard Routes  ===== */}
-        <Route path="/" element={<Landing />} />
-        <Route path="/dashboard" element={<Student_Dashboard />} />
-        <Route path="/dashboard/profile" element={<UserProfilePage />} />
-        <Route path="/dashboard/edit-profile" element={<EditProfilePage />} />
-        <Route path="/dashboard/my-projects" element={<MyProjects />} />
-        <Route path="/dashboard/skill-badges" element={<SkillBadgeForm />} />
-        <Route path="/dashboard/notifications" element={<NotificationsPage />} />
+      <Router>
+        <Routes>
+          {/* ===== Landing Page ===== */}
+          <Route path="/" element={<Landing />} />
 
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<RegistrationForm />} />
+          {/* =====About Page Routes ===== */}
+          <Route path="/about" element={
+            <div>
+              <Header />
+              <HeroSection />
+              <AboutSection />
+              <ProgramsSection />
+              <Footer />
+            </div>
+          } />
 
-        {/* ===== Company Dashboard Routes ===== */}
-        <Route path="/company" element={<CompanyDashboardHome />} />
-       
-        {/* ===== Catch-All Routes ===== */}
-        <Route path="/company/*" element={<CompanyNotFound />} />
-        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+          {/* =====  Student Dashboard Routes  ===== */}
+          <Route path="/dashboard" element={<Student_Dashboard />} />
+          <Route path="/dashboard/profile" element={<UserProfilePage />} />
+          <Route path="/dashboard/edit-profile" element={<EditProfilePage />} />
+          <Route path="/dashboard/my-projects" element={<MyProjects />} />
+          <Route path="/dashboard/skill-badges" element={<SkillBadgeForm />} />
+          <Route path="/dashboard/notifications" element={<NotificationsPage />} />
 
-        {/* ===== Contact Page Routes ===== */}
-        <Route path="/contact" element={<ContactPage />} />
-        {/*===== Project Showcase Page Routes */}
-        <Route path="/projectShowcase" element={<ProjectShowcasePage/>} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RegistrationForm />} />
 
-        {/*===== Mentor Dashboard Page routes */}  
-        <Route path="/mentor-dashboard/*" element={<MentorDashboardRoutes />} />
+          {/* ===== Company Dashboard Routes ===== */}
+          <Route path="/company" element={<CompanyDashboardHome />} />
+        
+          {/* ===== Catch-All Routes ===== */}
+          <Route path="/company/*" element={<CompanyNotFound />} />
+          <Route path="*" element={<h1>404 - Page Not Found</h1>} />
 
-         {/* ==== Admin Panel page routes */}
-        <Route path ="/adminPanel" element={<AdminPanel />} />
-      </Routes>
+          {/* ===== Contact Page Routes ===== */}
+          <Route path="/contact" element={<ContactPage />} />
+          
+          {/* ===== Project Showcase Page Routes ===== */}
+          <Route path="/projectShowcase" element={<ProjectShowcasePage/>} />
+
+          {/* ===== Mentor Dashboard Page routes ===== */}  
+          <Route path="/mentor-dashboard/*" element={<MentorDashboardRoutes />} />
+
+          {/* ===== Admin Panel page routes ===== */}
+          <Route path ="/adminPanel" element={<AdminPanel />} />
+        </Routes>
+      </Router>
     </QueryClientProvider>
   );
 }

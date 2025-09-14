@@ -66,7 +66,7 @@ router.post('/profile', async (req, res) => {
       });
     }
 
-    // Check if profile already exists for this user (you might want to add user_id later)
+    // Checking if profile already exists for this user
     const checkQuery = 'SELECT id FROM user_details WHERE full_name = $1';
     const checkResult = await pool.query(checkQuery, [full_name]);
 

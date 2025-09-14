@@ -21,21 +21,36 @@ function ProjectSubmissionForm() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    setShowModal(true);
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    setFormData({
-      student_id: '',
-      title: '',
-      description: '',
-      tech_stack: '',
-      contributions: '',
-      is_open_source: false,
-      github_pr_link: ''
+  try {
+    const response = await fetch("http://localhost:5000/api/projects", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
     });
-  };
+
+    if (response.ok) {
+      setShowModal(true);
+      setFormData({
+        student_id: '',
+        title: '',
+        description: '',
+        tech_stack: '',
+        contributions: '',
+        is_open_source: false,
+        github_pr_link: ''
+      });
+    } else {
+      alert("Failed to submit project");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+     
 
   const closeModal = () => setShowModal(false);
 

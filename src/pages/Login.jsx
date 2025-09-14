@@ -24,9 +24,8 @@ const LoginForm = () => {
     try {
       const response = await axios.post("http://localhost:5000/api/auth/login", formData);
       alert(response.data.message || "Login successful");
-      // Save token to localStorage or context as needed
       localStorage.setItem("token", response.data.token);
-      // Redirect based on role
+
       if (response.data.user.role === "admin") {
         navigate("/admin-dashboard");
       } else if (response.data.user.role === "student") {
@@ -45,6 +44,7 @@ const LoginForm = () => {
   return (
     <div className="h-[100vh] items-center flex justify-center px-5 lg:px-0">
       <div className="max-w-screen-xl bg-white shadow-xs shadow-[#00BDA6] sm:rounded-lg flex justify-center flex-1">
+        
         {/* Left Image Section */}
         <div className="hidden md:block md:w-1/2 lg:w-1/2 xl:w-7/12">
           <div

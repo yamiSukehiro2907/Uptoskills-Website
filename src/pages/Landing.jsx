@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function App() {
   return (
@@ -7,14 +8,29 @@ export default function App() {
       {/* Header */}
       <header className="fixed w-full z-50 bg-white/80 backdrop-blur-lg shadow-sm transition">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-          <img src="/uptoskill.jpeg" alt="Uptoskills Logo" className="h-10 transition-transform hover:scale-110" />
+          <Link to="/" aria-label="Uptoskills Home">
+            <img
+              src="/uptoskill.jpeg"
+              alt="Uptoskills Logo"
+              className="h-10 transition-transform hover:scale-110"
+            />
+          </Link>
+
           <nav className="flex space-x-6 font-medium text-gray-800 text-sm">
-            {["Home", "About", "Programs", "Contact"].map((link, i) => (
-              <a key={i} href="#" className="relative group hover:text-[#00BDA6]">
-                {link}
-                <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-[#00BDA6] group-hover:w-full transition-all duration-300"></span>
-              </a>
-            ))}
+            {["Home", "About", "Programs", "Contact"].map((link, i) => {
+              const path =
+                link.toLowerCase() === "home" ? "/" : `/${link.toLowerCase()}`;
+              return (
+                <Link
+                  key={i}
+                  to={path}
+                  className="relative group hover:text-[#00BDA6]"
+                >
+                  {link}
+                  <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-[#00BDA6] group-hover:w-full transition-all duration-300" />
+                </Link>
+              );
+            })}
           </nav>
         </div>
       </header>
@@ -31,7 +47,8 @@ export default function App() {
               Learn. Connect. <br /> Grow with Peers.
             </h1>
             <p className="text-gray-600 text-lg mb-6">
-              Collaborate with passionate learners and build real-world tech skills through projects.
+              Collaborate with passionate learners and build real-world tech
+              skills through projects.
             </p>
 
             {/* Buttons */}
@@ -89,18 +106,18 @@ export default function App() {
             {
               title: "For Learners",
               icon: "https://static.thenounproject.com/png/7914064-512.png",
-              desc: "Sharpen your tech skills with projects and peer sessions."
+              desc: "Sharpen your tech skills with projects and peer sessions.",
             },
             {
               title: "For Companies",
               icon: "https://cdn-icons-png.flaticon.com/512/2858/2858749.png",
-              desc: "Hire pre-vetted, job-ready talent from our community."
+              desc: "Hire pre-vetted, job-ready talent from our community.",
             },
             {
               title: "Success Stories",
               icon: "https://cdn-icons-png.flaticon.com/512/3159/3159980.png",
-              desc: "Real journeys of learners growing into tech professionals."
-            }
+              desc: "Real journeys of learners growing into tech professionals.",
+            },
           ].map((box, i) => (
             <motion.div
               key={i}
@@ -124,15 +141,22 @@ export default function App() {
 
       {/* Partners */}
       <section className="py-16 bg-[#f9f9f9] text-center">
-        <h3 className="text-2xl font-bold text-gray-800 mb-8">Trusted by Top Companies</h3>
+        <h3 className="text-2xl font-bold text-gray-800 mb-8">
+          Trusted by Top Companies
+        </h3>
         <div className="flex flex-wrap justify-center items-center gap-10">
           {[
             "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tata.svg",
             "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/infosys.svg",
             "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
-            "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+            "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
           ].map((logo, i) => (
-            <motion.img key={i} src={logo} alt="partner" className="h-10 grayscale hover:grayscale-0 transition duration-300" />
+            <motion.img
+              key={i}
+              src={logo}
+              alt="partner"
+              className="h-10 grayscale hover:grayscale-0 transition duration-300"
+            />
           ))}
         </div>
       </section>

@@ -74,16 +74,16 @@ const RegistrationForm = () => {
                 onSubmit={handleSubmit}
               >
                 {/* Role Selection */}
-                <select
-                  name="role"
-                  value={formData.role}
-                  onChange={handleChange}
-                  className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                >
-                  <option value="admin">Register as Admin</option>
-                  <option value="student">Register as Student</option>
-                  <option value="company">Register as Company</option>
-                </select>
+               <select
+  name="role"
+  value={formData.role}
+  onChange={handleChange}
+  className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+>
+  <option value="admin">Register as Admin</option>
+  <option value="student">Register as Student</option>
+  <option value="company">Register as Company</option>
+</select>
 
                 <input
                   name="name"

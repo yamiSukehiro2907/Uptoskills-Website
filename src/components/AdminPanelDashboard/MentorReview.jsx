@@ -22,6 +22,38 @@ function MentorReview() {
       feedback: "Provided insightful feedback on data projects.",
       rating: 4.5,
     },
+
+    // Additional sample data
+    {
+      id: 4,
+      mentor: "Mr. Patel",
+      feedback: "Great mentorship on React and frontend best practices.",
+      rating: 4.6,
+    },
+    {
+      id: 5,
+      mentor: "Ms. Kapoor",
+      feedback: "Very patient and thorough during code reviews.",
+      rating: 4.9,
+    },
+    {
+      id: 6,
+      mentor: "Dr. Verma",
+      feedback: "Helped students optimize ML models effectively.",
+      rating: 4.7,
+    },
+    {
+      id: 7,
+      mentor: "Prof. Iyer",
+      feedback: "Excellent conceptual explanations and project direction.",
+      rating: 4.4,
+    },
+    {
+      id: 8,
+      mentor: "Ms. Fernandes",
+      feedback: "Strong domain expertise and practical assignment feedback.",
+      rating: 4.3,
+    },
   ]);
 
   const [newReviewMentor, setNewReviewMentor] = useState("");
@@ -29,7 +61,7 @@ function MentorReview() {
   const [newReviewRating, setNewReviewRating] = useState("");
 
   const addMentorReview = () => {
-    if (newReviewMentor && newReviewText && newReviewRating) {
+    if (newReviewMentor && newReviewText && newReviewRating !== "") {
       const newId =
         mentorReviews.length > 0
           ? Math.max(...mentorReviews.map((r) => r.id)) + 1
@@ -48,13 +80,15 @@ function MentorReview() {
   };
 
   const renderStars = (rating) => {
+    // rating may be float; mark star active if star <= Math.round(rating)
+    const rounded = Math.round(rating);
     return (
       <div className="flex items-center gap-1">
         {[1, 2, 3, 4, 5].map((star) => (
           <Star
             key={star}
             className={`w-4 h-4 ${
-              star <= rating ? "text-warning fill-warning" : "text-muted-foreground"
+              star <= rounded ? "text-warning fill-warning" : "text-muted-foreground"
             }`}
           />
         ))}
@@ -62,6 +96,7 @@ function MentorReview() {
       </div>
     );
   };
+
   return (
     <main className="p-4 sm:p-6 flex flex-col gap-6">
       <motion.h2
@@ -139,7 +174,7 @@ function MentorReview() {
             className="stat-card p-6 cursor-pointer"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
+            transition={{ delay: index * 0.06 }}
             whileHover={{ scale: 1.02, y: -4 }}
           >
             <div className="flex items-center gap-3 mb-4">
