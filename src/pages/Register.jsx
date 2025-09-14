@@ -6,7 +6,7 @@ import axios from "axios";
 const RegistrationForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    role: "Student",
+    role: "student",
     name: "",
     email: "",
     phone: "",
@@ -31,20 +31,13 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.email) {
-      alert("Please enter your email.");
-      return;
-    }
     try {
-      await axios.post("http://localhost:5000/api/auth/send-otp", {
-        email: formData.email,
-      });
-      setTimeout(() => {
-        navigate("/otpverify", { state: { ...formData } });
-      }, 1000);
+      const response = await axios.post("http://localhost:5000/api/auth/register", formData);
+      alert(response.data.message);
+      navigate("/login");
     } catch (err) {
       console.error(err);
-      alert("Failed to send OTP. Please try again.");
+      alert(err.response?.data?.message || "Registration failed. Please try again.");
     }
   };
 
@@ -81,16 +74,16 @@ const RegistrationForm = () => {
                 onSubmit={handleSubmit}
               >
                 {/* Role Selection */}
-                <select
-                  name="role"
-                  value={formData.role}
-                  onChange={handleChange}
-                  className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                >
-                  <option value="Admin">Register as Admin</option>
-                  <option value="Student">Register as Student</option>
-                  <option value="company">Register as company</option>
-                </select>
+               <select
+  name="role"
+  value={formData.role}
+  onChange={handleChange}
+  className="w-full px-5 py-3 rounded-lg font-medium bg-gray-100 border border-gray-200 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+>
+  <option value="admin">Register as Admin</option>
+  <option value="student">Register as Student</option>
+  <option value="company">Register as Company</option>
+</select>
 
                 <input
                   name="name"

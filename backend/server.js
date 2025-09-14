@@ -6,6 +6,7 @@ require('dotenv').config();
 const pool = require('./config/database');
 
 const userProfileRoutes = require('./routes/userProfile');
+const authRoutes = require('./routes/auth');
 const projectsRoutes = require('./routes/projects');
 
 const app = express();
@@ -17,7 +18,8 @@ app.use(express.json());
 
 // Routes
 app.use('/api', userProfileRoutes);
-app.use('/api',projectsRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/projects', projectsRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
