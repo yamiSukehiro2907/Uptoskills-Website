@@ -182,4 +182,23 @@ router.post('/profile', async (req, res) => {
     }
   });
 
+// Delete student by ID
+router.delete('/profile/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const query = 'DELETE FROM user_details WHERE id = $1 RETURNING *';
+    const result = await pool.query(query, [id]);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ success: false, message: 'Student not found' });
+    }
+
+    res.status(200).json({ success: true, message: 'Student deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting profile:', error);
+    res.status(500).json({ success: false, message: 'Error deleting profile', error: error.message });
+  }
+});
+
 module.exports = router;
